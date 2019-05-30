@@ -11,8 +11,6 @@
             // Test if connection successful
             if ($mysqli->connect_errno) {
                 die("Could not connect to server!<br />");
-            } else {
-                echo "Successful connection to ".DBNAME."<hr />";
             }
             return $mysqli;
         }
