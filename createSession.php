@@ -46,48 +46,37 @@
 
         <?php
             if (isset($_POST['submit'])) {
-                if (isset($_POST['Username']) && $_POST['Username'] !== ''
-                    && isset($_POST['Fname']) && $_POST['Fname'] !== ''
-                    && isset($_POST['Lname']) && $_POST['Lname'] !== ''
-                    && isset($_POST['Mi'])
-                    && isset($_POST['Id'])
-                    && isset($_POST['Email']) && $_POST['Email'] !== '') {
-                    $query_user_exists = "SELECT username FROM User WHERE username = ".$_POST['Username'];
+                if (isset($_POST['Course']) && $_POST['Course'] !== ''
+                    && isset($_POST['Professor']) && $_POST['Professor'] !== ''
+                    && isset($_POST['Type']) && $_POST['Type'] !== ''
+                    && isset($_POST['Date Time'])) {
 
-                    $result_user_exists = $mysqli->query($query_user_exists);
-                    if ($result_user_exists) {
-                        $_SESSION["message"] = "Error! Could not add ".$_POST["Username"].". User already exists";
-                        header("Location: createUser.php");
+                    $query_session_exists = $mysqli->prepare("SELECT * FROM session WHERE course = ? AND professor = ? AND type = ? AND date_time = ?");
+                    $query_session_exists->bind_param("ssss", $_POST['Course'], $_POST['Professor'], $_POST['Type'], $_POST['Date_time']);
+                    $query_session_exists->execute();
+                    $result_session_exists = $query_session_exists->get_result();
+
+                    if ($result_session_exists) {
+                        $_SESSION["message"] = "Error! Could not add the session. One with the same data already exists";
+                        header("Location: createSession.php");
                         exit;
-                    }
-                    $admin = 0;
-                    $mentor = 0;
-                    $leader = 0;
-                    if (isset($_POST['Admin'])) {
-                        $admin = 1;
-                    }
-                    if (isset($_POST['Mentor'])) {
-                        $mentor = 1;
-                    }
-                    if (isset($_POST['Leader'])) {
-                        $leader = 1;
                     }
 
 
-                    $query_add_user = "INSERT INTO User (username, FName, LName, MI, id, admin, mentor, leader, email) VALUES ('".$_POST['Username']."', '".$_POST['Fname']."', '".$_POST['Lname']."', '".$_POST['Mi']."', '".$_POST['Id']."', '".$admin."', '".$mentor."', '".$leader."', '".$_POST['Email']."')";
-                    $result_add_user = $mysqli->query($query_add_user);
-                    if ($result_add_user) {
-                        $_SESSION['message'] = $_POST['Username']." has been added.";
-                        header("Location: createUser.php");
-                        exit;
-                    } else {
-                        $_SESSION["message"] = "Error! Could not add ".$_POST["Username"]."---".$query_add_user;
-                        header("Location: createUser.php");
-                        exit;
-                    }
+                    // $query_add_user = "INSERT INTO User (username, FName, LName, MI, id, admin, mentor, leader, email) VALUES ('".$_POST['Username']."', '".$_POST['Fname']."', '".$_POST['Lname']."', '".$_POST['Mi']."', '".$_POST['Id']."', '".$admin."', '".$mentor."', '".$leader."', '".$_POST['Email']."')";
+                    // $result_add_user = $mysqli->query($query_add_user);
+                    // if ($result_add_user) {
+                    //     $_SESSION['message'] = $_POST['Username']." has been added.";
+                    //     header("Location: createUser.php");
+                    //     exit;
+                    // } else {
+                    //     $_SESSION["message"] = "Error! Could not add ".$_POST["Username"]."---".$query_add_user;
+                    //     header("Location: createUser.php");
+                    //     exit;
+                    // }
                 } else {
                     $_SESSION["message"] = "Enter correct info";
-                    header("Location: createUser.php");
+                    header("Location: createSession.php");
                     exit;
                 }
             }
