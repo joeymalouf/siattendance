@@ -87,11 +87,11 @@
                 <select id='course' name='Course' class='form-control'>
                     <option></option>
                     <?php
-                        $query_courses = "SELECT courseID FROM Course";
+                        $query_courses = "SELECT course FROM Course";
                         $result_courses = $mysqli->query($query_courses);
                         if ($result_courses && $result_courses->num_rows > 0) {
                             while ($row = $result_courses->fetch_assoc()) {
-                                echo "<option value='".$row['courseID']."'>".$row['courseID']."</option>";
+                                echo "<option value='".$row['course']."'>".$row['course']."</option>";
                             }
                         }
 			else {
