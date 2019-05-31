@@ -65,9 +65,8 @@
 
                     $query_add_session = $mysqli->prepare("INSERT INTO Session (course, professor, type, date_time) VALUES (?,?,?,?)");
                     $query_add_session->bind_param('ssss', $_POST['Course'], $_POST['Professor'], $_POST['Type'], $_POST['Date_time']);
-                    $query_add_session->execute();
-                    $result_add_session = get_result($query_add_session);
-                    if ($result_add_session) {
+                    $execute = $query_add_session->execute();
+                    if ($execute) {
                         $_SESSION['message'] = "Session has been added.";
                         header("Location: createSession.php");
                         exit;
