@@ -32,10 +32,14 @@
         </div>
 
         <?php
+            if(isset($_GET['submit'])) {
+                $_POST['submit'] = $_GET['submit'];
+                $_POST['Sessionid'] = $_GET['Sessionid'];
+            }
             if (isset($_POST['submit'])) {
                 if (isset($_POST['Sessionid']) && $_POST['Course'] !== '') {
                     $query_session_exists = $mysqli->prepare("SELECT * FROM Session WHERE sessionid = ?");
-                    $query_session_exists->bind_param("s", $_POST['Sessionid']);
+                    $query_session_exists->bind_param("i", $_POST['Sessionid']);
                     $query_session_exists->execute();
                     $result_session_exists = get_result($query_session_exists);
 
@@ -48,7 +52,7 @@
                     $query_add_attendance = $mysqli->prepare("INSERT INTO Attendance (username, sessionid) VALUES (?,?)");
 
                     $query_add_attendance->bind_param('si', $username, $result_session_exists[0]['sessionid']);
-                    $execute = $query_add_session->execute();
+                    $execute = $query_add_attendance->execute();
                     if ($execute) {
                         $_SESSION['message'] = "Attendance has been added.";
                         header("Location: createAttendance.php");
@@ -83,7 +87,7 @@
                     ?>
                 </select>
 
-
+            </div>
                 <div class='form-group'>
                     <input type='submit' name='submit' class='btn btn-primary' />
                 </div>
