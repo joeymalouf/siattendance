@@ -5,7 +5,7 @@
 <?php
         require_once("global_functions.php");
         $mysqli = db_connection();
-    ?>
+?>
 
 <head>
     <Title>SI</Title>
@@ -71,12 +71,12 @@
                         header("Location: createSession.php");
                         exit;
                     } else {
-                        $_SESSION["message"] = "Error! Could not add session";
+                        $_SESSION["message"] = "Server error! Could not add session. Try again later.";
                         header("Location: createSession.php");
                         exit;
                     }
                 } else {
-                    $_SESSION["message"] = "Enter correct info";
+                    $_SESSION["message"] = "Enter correct info.";
                     header("Location: createSession.php");
                     exit;
                 }
