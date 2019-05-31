@@ -51,10 +51,10 @@
                     && isset($_POST['Type']) && $_POST['Type'] !== ''
                     && isset($_POST['Date_time'])) {
 
-                    $query_session_exists = $mysqli->prepare("SELECT * FROM session WHERE course = ? AND professor = ? AND type = ? AND date_time = ?");
+                    $query_session_exists = $mysqli->prepare("SELECT * FROM Session WHERE course = ? AND professor = ? AND type = ? AND date_time = ?");
                     $query_session_exists->bind_param("ssss", $_POST['Course'], $_POST['Professor'], $_POST['Type'], $_POST['Date_time']);
                     $query_session_exists->execute();
-                    $result_session_exists = $query_session_exists->get_result();
+                    $result_session_exists = get_result($query_session_exists);
 
                     if ($result_session_exists) {
                         $_SESSION["message"] = "Error! Could not add the session. One with the same data already exists";
@@ -66,7 +66,7 @@
                     $query_add_session = $mysqli->prepare("INSERT INTO Session (course, professor, type, date_time) VALUES (?,?,?,?)");
                     $query_add_session->bind_param('ssss', $_POST['Course'], $_POST['Professor'], $_POST['Type'], $_POST['Date_time']);
                     $query_add_session->execute();
-                    $result_add_session = $query_add_session->get_result();
+                    $result_add_session = get_result($query_add_session);
                     if ($result_add_session) {
                         $_SESSION['message'] = "Session has been added.";
                         header("Location: createSession.php");
