@@ -113,6 +113,7 @@
             </div>
             
             <div class='form-group'>
+                <label for="professor">Professor</label>
                 <select id='professor' name='Professor' class='form-control'>
                 <option></option>
 		</select>
@@ -122,25 +123,10 @@
                 <input id='lname' type='text' name='Lname' class='form-control'>
             </div>
             <div class='form-group'>
-                <label for="mi">Middle Initial</label>
-                <input id='mi' type='text' name='Mi' class='form-control'>
+                <label for="date_time">Date Time</label>
+                <input id='date_time' type='datetime-local' name='Date_time' class='form-control'>
             </div>
-            <div class='form-group'>
-                <label for="id">Student ID</label>
-                <input id='id' type='number' name='Id' class='form-control'>
-            </div>
-            <div class='form-group'>
-                <label for="admin">Admin</label>
-                <input id='admin' type='checkbox' name='Admin' class='form-control' value="1">
-                <label for="mentor">Mentor</label>
-                <input id='mentor' type='checkbox' name='Mentor' class='form-control' value="1">
-                <label for="leader">Leader</label>
-                <input id='leader' type='checkbox' name='Leader' class='form-control' value="1">
-            </div>
-            <div class='form-group'>
-                <label for="email">Email</label>
-                <input id='email' type='email' name='Email' class='form-control'>
-            </div>
+
             <div class='form-group'>
                 <input type='submit' name='submit' class='btn btn-primary' />
             </div>
