@@ -119,8 +119,11 @@
 		</select>
             </div>
             <div class='form-group'>
-                <label for="lname">Last Name</label>
-                <input id='lname' type='text' name='Lname' class='form-control'>
+                <label for="type">Type</label>
+                <select id='type' name='Type' class='form-control'>
+                    <option value="Lecture Review">Lecture Review</option>
+                    <option value="Exam Review">Exam Review</option>
+                </select>
             </div>
             <div class='form-group'>
                 <label for="date_time">Date Time</label>
