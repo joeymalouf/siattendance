@@ -26,7 +26,7 @@
             $('#course').change(function(){
                 var inputValue = $(this).val();
 		console.log(inputValue)
-                $.post('getProfessors.php', { courseID : inputValue }, function(html){
+                $.post('getProfessors.php', { course : inputValue }, function(html){
 			$("#professor").html(html)
                 });
             });
@@ -49,7 +49,7 @@
                 if (isset($_POST['Course']) && $_POST['Course'] !== ''
                     && isset($_POST['Professor']) && $_POST['Professor'] !== ''
                     && isset($_POST['Type']) && $_POST['Type'] !== ''
-                    && isset($_POST['Date Time'])) {
+                    && isset($_POST['Date_time'])) {
 
                     $query_session_exists = $mysqli->prepare("SELECT * FROM session WHERE course = ? AND professor = ? AND type = ? AND date_time = ?");
                     $query_session_exists->bind_param("ssss", $_POST['Course'], $_POST['Professor'], $_POST['Type'], $_POST['Date_time']);
@@ -63,17 +63,19 @@
                     }
 
 
-                    // $query_add_user = "INSERT INTO User (username, FName, LName, MI, id, admin, mentor, leader, email) VALUES ('".$_POST['Username']."', '".$_POST['Fname']."', '".$_POST['Lname']."', '".$_POST['Mi']."', '".$_POST['Id']."', '".$admin."', '".$mentor."', '".$leader."', '".$_POST['Email']."')";
-                    // $result_add_user = $mysqli->query($query_add_user);
-                    // if ($result_add_user) {
-                    //     $_SESSION['message'] = $_POST['Username']." has been added.";
-                    //     header("Location: createUser.php");
-                    //     exit;
-                    // } else {
-                    //     $_SESSION["message"] = "Error! Could not add ".$_POST["Username"]."---".$query_add_user;
-                    //     header("Location: createUser.php");
-                    //     exit;
-                    // }
+                    $query_add_session = $mysqli->prepare("INSERT INTO Session (course, professor, type, date_time) VALUES (?,?,?,?)");
+                    $query_add_session->bind_param('ssss', $_POST['Course'], $_POST['Professor'], $_POST['Type'], $_POST['Date_time']);
+                    $query_add_session->execute();
+                    $result_add_session = $query_add_session->get_result();
+                    if ($result_add_session) {
+                        $_SESSION['message'] = "Session has been added.";
+                        header("Location: createSession.php");
+                        exit;
+                    } else {
+                        $_SESSION["message"] = "Error! Could not add session";
+                        header("Location: createSession.php");
+                        exit;
+                    }
                 } else {
                     $_SESSION["message"] = "Enter correct info";
                     header("Location: createSession.php");
