@@ -16,7 +16,7 @@ new Vue({
             this.$http.post('../../back/SISession.php', body)
             .then( response => {
                 console.log(response.data)
-                session = response.data[0]
+                this.session = response.data[0]
                 this.message = "Pass"
             }, response => {
                 this.message = "Fail"

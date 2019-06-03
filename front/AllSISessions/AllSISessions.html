@@ -18,6 +18,28 @@
 
     <div id="sessions">
         {{ sessions }}
+        <table class='table'>
+            <thead>
+                <tr>
+                    <th>
+                        <td>ID</td>
+                        <td>Professor</td>
+                        <td>Course</td>
+                        <td>Type</td>
+                        <td>Date/Time</td>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="row in sessions">
+                    <td>{{ row.sessionid }}</td>
+                    <td>{{ row.professor }}</td>
+                    <td>{{ row.course }}</td>
+                    <td>{{ row.type }}</td>
+                    <td>{{ row.date_time }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <script src="./AllSISessions.js"></script>
