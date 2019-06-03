@@ -11,23 +11,22 @@
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
         </script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
-	
-</head>
-<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
 
+</head>
+
+<body>
+    <div class="container">
+        <div class="row col-sm-10">
     <div id="sessions">
-        {{ sessions }}
         <table class='table'>
             <thead>
                 <tr>
-                    <th>
-                        <td>ID</td>
-                        <td>Professor</td>
-                        <td>Course</td>
-                        <td>Type</td>
-                        <td>Date/Time</td>
-                    </th>
+                    <th>ID</th>
+                    <th>Professor</th>
+                    <th>Course</th>
+                    <th>Type</th>
+                    <th>Date/Time</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,7 +40,8 @@
             </tbody>
         </table>
     </div>
-
+</div>
+</div>
     <script src="./AllSISessions.js"></script>
 </body>
 
