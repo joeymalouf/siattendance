@@ -8,6 +8,7 @@ new Vue({
         database: function() {
             var ID = 2;
             console.log(ID)
+
             var result = $.post('SISession.php', {
                 sessionID: ID,
                 func: 'getSession'
@@ -20,5 +21,8 @@ new Vue({
                 this.message = "Fail"
             })
         }
+    },
+    beforeMount() {
+        this.database();
     }
 });
