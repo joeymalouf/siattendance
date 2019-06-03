@@ -4,22 +4,21 @@ new Vue({
     data: {
         message: "Hello word",
     },
-    post: {
-        database: function () {
+    methods: {
+        database: function() {
             var ID = 2;
             console.log(ID)
             var result = $.post('SISession.php', {
                 sessionID: ID,
                 func: 'getSession'
             })
-            .done(function () {
+            .done( function () {
                 console.log(result)
-                data = "Pass"
+                this.message = "Pass"
             })
-            .fail(function () {
-                data = "Fail"
+            .fail( function () {
+                this.message = "Fail"
             })
         }
     }
-
-})
+});
