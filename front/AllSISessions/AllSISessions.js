@@ -1,22 +1,20 @@
 new Vue({
-    el: '#session',
+    el: '#sessions',
 
     data: {
         message: "Hello word",
-        session: {},
-        qr: {}
+        sessions: {},
     },
     methods: {
         database: function() {
             var ID = 2;
             console.log(ID)
 		var body = new FormData();
-		body.append('sessionID', ID);
-		body.append('func', 'getSession');
+		body.append('func', 'getAllSessions');
             this.$http.post('../../back/SISession.php', body)
             .then( response => {
                 console.log(response.data)
-                session = response.data[0]
+                sessions = response.data
                 this.message = "Pass"
             }, response => {
                 this.message = "Fail"
