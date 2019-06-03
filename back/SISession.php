@@ -18,7 +18,7 @@
             exit;
         }
         print_r(json_encode($result_session));
-        printr(generateQR("https://turing.cs.olemiss.edu/~jmmalouf/SIAttendence/front/SISession/SISession.html?sessionID=2&func=getSession"));
+        print_r(generateQR("https://turing.cs.olemiss.edu/~jmmalouf/SIAttendence/front/SISession/SISession.html?sessionID=2&func=getSession"));
     }
 
     function getAllSessions() {
@@ -26,14 +26,14 @@
         $query_sessions = $mysqli->prepare("SELECT * FROM Session");
         $query_sessions->bind_param("i", $sessionID);
         $query_sessions->execute();
-        $result_session = get_result($query_session);
+        $result_sessions = get_result($query_sessions);
 
-        if (!$result_session) {
+        if (!$result_sessions) {
             $_SESSION["message"] = "Error! Could not get sessions.";
             header("Location: ../front/index.php");
             exit;
         }
-        print_r(json_encode($result_session));
+        print_r(json_encode($result_sessions));
 
     }
 
@@ -45,3 +45,4 @@
     if (isset($_POST['func']) && $_POST['func'] == 'getAllSessions') {
         getAllSessions();
     }
+?>
