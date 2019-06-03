@@ -8,18 +8,15 @@ new Vue({
         database: function() {
             var ID = 2;
             console.log(ID)
-
-            var result = $.post('SISession.php', {
-                sessionID: ID,
-                func: 'getSession'
-            })
-            .done( function () {
-                console.log(result)
+		var body = new FormData();
+		body.append('sessionID', ID);
+		body.append('func', 'getSession');
+            this.$http.post('../../back/SISession.php', body).then((response) => {
+                console.log(response.data)
                 this.message = "Pass"
-            })
-            .fail( function () {
+            }, response => {
                 this.message = "Fail"
-            })
+            });
         }
     },
     beforeMount() {
