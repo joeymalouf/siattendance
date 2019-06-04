@@ -2,7 +2,6 @@
 
     require_once("/home/jmmalouf/public_html/SIAttendence/session.php");
     require_once("/home/jmmalouf/public_html/SIAttendence/global_functions.php");
-    require_once("/home/jmmalouf/public_html/SIAttendence/qrGenerator.php");
 
     function getSession($sessionID)
     {
@@ -17,10 +16,10 @@
             header("Location: ../front/index.php");
             exit;
         }
-        print_r(json_encode($result_session));
-        print_r(generateQR("https://turing.cs.olemiss.edu/~jmmalouf/SIAttendence/front/SISession/SISession.html?sessionID=2&func=getSession"));
-    }
 
+        print_r(json_encode($result_session));
+    	
+    }
     function getAllSessions() {
         $mysqli = db_connection();
         $query_sessions = $mysqli->prepare("SELECT * FROM Session");

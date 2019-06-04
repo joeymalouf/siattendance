@@ -6,7 +6,7 @@ const routes = [{
         component: allSessions
     },
     {
-        path: '/session::sessioid',
+        path: '/session/:sessionid',
         component: session
     },
 ];
