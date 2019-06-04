@@ -39,20 +39,20 @@ var allSessions = Vue.component("allSessions", {
             console.log(ID)
             var body = new FormData();
             body.append('func', 'getAllSessions');
-            this.$http.post('../../back/SISession.php', body)
+            this.$http.post('back/SISession.php', body)
                 .then(response => {
                     console.log(response.data)
                     this.sessions = response.data
-                    this.message = "Pass"
+                    this.message = "All Session Pass"
                 }, response => {
-                    this.message = "Fail"
+                    this.message = "All Session Fail"
                 });
         },
         viewSession(ID) {
             var body = new FormData();
             body.append('sessionID', ID);
             body.append('func', 'getSession');
-            this.$http.post('../../back/SISession.php', body)
+            this.$http.post('back/SISession.php', body)
                 .then(response => {
                     console.log(response.data)
                     this.session = response.data[0]
@@ -61,5 +61,8 @@ var allSessions = Vue.component("allSessions", {
                     this.message = "Fail"
                 });
         }
+    },
+	beforeMount() {
+        this.database();
     }
 });

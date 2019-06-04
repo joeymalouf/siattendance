@@ -6,7 +6,7 @@
         }
         function db_connection()
         {
-            require_once("C:/Users/joeym/OneDrive/DBMalouf.php");
+            require_once("/home/jmmalouf/DBMalouf.php");
             $mysqli = new mysqli(DBHOST, USERNAME, PASSWORD, DBNAME);
             // Test if connection successful
             if ($mysqli->connect_errno) {

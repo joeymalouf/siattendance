@@ -1,8 +1,8 @@
 <?php
 
-    require_once("../session.php");
-    require_once("../global_functions.php");
-    require_once("../qrGenerator.php");
+    require_once("/home/jmmalouf/public_html/SIAttendence/session.php");
+    require_once("/home/jmmalouf/public_html/SIAttendence/global_functions.php");
+    require_once("/home/jmmalouf/public_html/SIAttendence/qrGenerator.php");
 
     function getSession($sessionID)
     {

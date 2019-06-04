@@ -2,12 +2,13 @@ Vue.use(VueRouter);
 Vue.use(VeeValidate);
 
 const routes = [{
-        path: '/allSessions',
+        path: '/',
         component: allSessions
     },
 ];
 
 const router = new VueRouter({
+    base: "~/public_html/SIAttendance/",
     routes // short for `routes: routes`
 })
 
