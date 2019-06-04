@@ -6,21 +6,35 @@ new Vue({
         sessions: {},
     },
     methods: {
-        database: function() {
+        database: function () {
             var ID = 2;
             console.log(ID)
-		var body = new FormData();
-		body.append('func', 'getAllSessions');
+            var body = new FormData();
+            body.append('func', 'getAllSessions');
             this.$http.post('../../back/SISession.php', body)
-            .then( response => {
-                console.log(response.data)
-                this.sessions = response.data
-                this.message = "Pass"
-            }, response => {
-                this.message = "Fail"
-            });
+                .then(response => {
+                    console.log(response.data)
+                    this.sessions = response.data
+                    this.message = "Pass"
+                }, response => {
+                    this.message = "Fail"
+                });
+        },
+        viewSession: function (ID) {
+            var body = new FormData();
+            body.append('sessionID', ID);
+            body.append('func', 'getSession');
+            this.$http.post('../../back/SISession.php', body)
+                .then(response => {
+                    console.log(response.data)
+                    this.session = response.data[0]
+                    this.message = "Pass"
+                }, response => {
+                    this.message = "Fail"
+                });
         }
-    },
+    }
+},
     beforeMount() {
         this.database();
     }
