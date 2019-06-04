@@ -20,7 +20,7 @@ var allSessions = Vue.component("allSessions", {
                         <td>{{ row.course }}</td>
                         <td>{{ row.type }}</td>
                         <td>{{ row.date_time }}</td>
-                        <td><button class='btn' v-on:click="viewSession(row.sessionid)">View</button></td>
+                        <td><button class='btn'><router-link :to="/session/row.sessionid"></button></td>
                     </tr>
                 </tbody>
             </table>

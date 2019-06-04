@@ -5,6 +5,10 @@ const routes = [{
         path: '/',
         component: allSessions
     },
+    {
+        path: '/session::sessioid',
+        component: session
+    },
 ];
 
 const router = new VueRouter({
