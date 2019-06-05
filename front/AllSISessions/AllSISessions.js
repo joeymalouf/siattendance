@@ -2,12 +2,11 @@ var allSessions = Vue.component("allSessions", {
     template: `
     <v-data-table :headers="headers" :items="sessions" class="elevation-1">
         <template v-slot:items="props">
-            <td>{{ props.item.name }}</td>
-            <td class="text-xs-right">{{ props.item.sessionid }}</td>
-            <td class="text-xs-right">{{ props.item.fat }}</td>
-            <td class="text-xs-right">{{ props.item.carbs }}</td>
-            <td class="text-xs-right">{{ props.item.protein }}</td>
-            <td class="text-xs-right">{{ props.item.iron }}</td>
+            <td>{{ props.item.sessionid }}</td>
+            <td class="text-xs-right">{{ props.item.course }}</td>
+            <td class="text-xs-right">{{ props.item.type }}</td>
+            <td class="text-xs-right">{{ props.item.date_time }}</td>
+            <td><button class='btn' v-on:click="viewSession(props.item.sessionid)">View</button></td>
         </template>
     </v-data-table>
             `
