@@ -1,14 +1,15 @@
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
+Vue.use(Vuetify)
 
 const routes = [{
-        path: '/',
-        component: allSessions
-    },
-    {
-        path: '/session/:sessionid',
-        component: session
-    },
+    path: '/',
+    component: allSessions
+},
+{
+    path: '/session/:sessionid',
+    component: session
+},
 ];
 
 const router = new VueRouter({
@@ -23,9 +24,10 @@ router.beforeEach((to, from, next) => {
 const app = new Vue({
     el: '#app',
     watch: {},
-    data: {
-        msg: 'Hello'
-    },
+    data: () => ({
+        drawer: null
+      }),
     methods: {},
-    router
+    router,
+    
 })

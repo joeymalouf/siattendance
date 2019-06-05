@@ -1,36 +1,48 @@
 var allSessions = Vue.component("allSessions", {
-    template: `<div class="container">
-    <div class="row col-sm-10">
-        <div id="sessions">
-            <table class='table'>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Professor</th>
-                        <th>Course</th>
-                        <th>Type</th>
-                        <th>Date/Time</th>
-                        <th>View</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="row in sessions">
-                        <td>{{ row.sessionid }}</td>
-                        <td>{{ row.professor }}</td>
-                        <td>{{ row.course }}</td>
-                        <td>{{ row.type }}</td>
-                        <td>{{ row.date_time }}</td>
-                        <td><router-link :to="{ path: '/session/' + row.sessionid}"><button class='btn btn-primary'>View</button></router-link></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>`,
-    data: function ()  {
+    template: `
+    <v-data-table :headers="headers" :items="sessions" class="elevation-1">
+        <template v-slot:items="props">
+            <td>{{ props.item.name }}</td>
+            <td class="text-xs-right">{{ props.item.sessionid }}</td>
+            <td class="text-xs-right">{{ props.item.fat }}</td>
+            <td class="text-xs-right">{{ props.item.carbs }}</td>
+            <td class="text-xs-right">{{ props.item.protein }}</td>
+            <td class="text-xs-right">{{ props.item.iron }}</td>
+        </template>
+    </v-data-table>
+            `
+            ,
+    data: function () {
         return {
             message: "Hello word",
-            sessions: {},
+            sessions: [],
+            headers: [
+                {
+                    text: "ID",
+                    sortable: true,
+                    value: 'id' 
+                },
+                {
+                    text: "Course",
+                    sortable: true,
+                    value: 'course' 
+                },
+                {
+                    text: "Type",
+                    sortable: true,
+                    value: 'type' 
+                },
+                {
+                    text: "Date/Time",
+                    sortable: true,
+                    value: 'date_time' 
+                },
+                {
+                    text: "View",
+                    sortable: true,
+                    value: 'view' 
+                },
+            ],
         }
     },
     methods: {
@@ -62,7 +74,7 @@ var allSessions = Vue.component("allSessions", {
                 });
         }
     },
-	beforeMount() {
+    beforeMount() {
         this.database();
     }
 });
