@@ -1,7 +1,7 @@
 <?php
 
-    require_once("/home/jmmalouf/public_html/SIAttendence/session.php");
-    require_once("/home/jmmalouf/public_html/SIAttendence/global_functions.php");
+    require_once("/home/jmmalouf/public_html/SIAttendance/session.php");
+    require_once("/home/jmmalouf/public_html/SIAttendance/global_functions.php");
 
     function getSession($sessionID)
     {
