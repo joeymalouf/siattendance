@@ -6,7 +6,7 @@ var allSessions = Vue.component("allSessions", {
             <td class="text-xs-right">{{ props.item.course }}</td>
             <td class="text-xs-right">{{ props.item.type }}</td>
             <td class="text-xs-right">{{ props.item.date_time }}</td>
-            <td><button class='btn' v-on:click="viewSession(props.item.sessionid)">View</button></td>
+            <td><router-link :to="'/session/'+props.item.sessionid"  style="text-decoration: none;"><v-btn class="info">View</v-btn></router-link></td>
         </template>
     </v-data-table>
             `
