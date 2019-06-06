@@ -20,6 +20,7 @@
         print_r(json_encode($result_session));
     	
     }
+
     function getAllSessions() {
         $mysqli = db_connection();
         $query_sessions = $mysqli->prepare("SELECT * FROM Session");
@@ -36,9 +37,32 @@
 
     }
 
+    function getSessionAttendance($sessionID)
+    {
+        $mysqli = db_connection();
+        $query_session = $mysqli->prepare("SELECT DISTINCT fname, lname, id FROM Attendance NATURAL JOIN User WHERE sessionid = ?");
+        $query_session->bind_param("i", $sessionID);
+        $query_session->execute();
+        $result_session = get_result($query_session);
+
+        if (!$result_session) {
+            $_SESSION["message"] = "Error! Session attendance could not be found.";
+            header("Location: ../front/index.php");
+            exit;
+        }
+
+        print_r(json_encode($result_session));
+    	
+    }
+
     if (isset($_POST['func']) && $_POST['func'] == 'getSession') {
         if (isset($_POST['sessionID'])) {
             getSession($_POST['sessionID']);
+        }
+    }
+    if (isset($_POST['func']) && $_POST['func'] == 'getSessionAttendance') {
+        if (isset($_POST['sessionID'])) {
+            getSessionAttendance($_POST['sessionID']);
         }
     }
     if (isset($_POST['func']) && $_POST['func'] == 'getAllSessions') {
