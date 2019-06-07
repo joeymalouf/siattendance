@@ -1,7 +1,12 @@
 <?php
+
     $username = "jmmalouf";
 
     session_start();
+
+    function getUsername() {
+        $_SESSION['username'] = $_SERVER['uid'];
+    }
 
     function message() {
         if (isset($_SESSION["message"])) {

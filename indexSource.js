@@ -18,7 +18,10 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    next()
+    if (true) {
+        next();
+    }
+    next(false);
 })
 
 const app = new Vue({

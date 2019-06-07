@@ -42,7 +42,7 @@ var session = Vue.component("session", {
         database() {
             var ID = this.$route.params.sessionid;
             new QRCode(document.getElementById("qrcode"), {
-                text: "https://turing.cs.olemiss.edu/~jmmalouf/SIAttendence/#/session/" + this.ID,
+                text: "https://turing.cs.olemiss.edu/~jlucas/test/SIAttendence/#/session/" + this.ID,
                 width: 512,
                 height: 512,
             });
@@ -60,7 +60,8 @@ var session = Vue.component("session", {
             var attendanceBody = new FormData();
             attendanceBody.append('sessionID', ID);
             attendanceBody.append('func', 'getSessionAttendance');
-            this.$http.post('back/SISession.php', body)
+
+            this.$http.post('back/SISession.php', attendanceBody)
                 .then(response => {
                     console.log(response.data)
                     this.attendances = response.data[0]
