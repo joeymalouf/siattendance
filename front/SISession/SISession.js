@@ -73,10 +73,9 @@ var session = Vue.component("session", {
 
         viewQR() {
             this.qr = document.getElementById("qrcode").getElementsByTagName("img")[0].src;
+            var test = 'data:text/html;charset=utf-8,' + encodeURI('<div style="display: table-cell;height: 100vh;text-align: center;width: 100vw;vertical-align: middle;"><img src="'+this.qr+'"></div>');
             var win = window.open();
-            win.document.write('<iframe src="' + this.qr + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; align-content: center; justify-content: center;" allowfullscreen></iframe>');
-            win.document.getElementsByTagName('iframe')[0].style.marginLeft = "calc(50vw - 256px)";
-            win.document.getElementsByTagName('iframe')[0].style.marginTop = "calc(50vh - 256px)";
+            win.document.write('<iframe src="' + this.qr + '" frameborder="0" style="width:100%; height:100%;" allowfullscreen></iframe>');
         }
     },
     mounted() {
