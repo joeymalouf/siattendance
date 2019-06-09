@@ -14,8 +14,8 @@ var createAttendance = Vue.component("createAttendance", {
     </v-flex>`,
     data: function () {
         return {
-            sessionid = this.$route.params.sessionid,
-            session = {
+            sessionid: this.$route.params.sessionid,
+            session: {
                 sessionid: 2,
                 course: "Chem 105",
                 type: "Lecture Review",
@@ -28,13 +28,12 @@ var createAttendance = Vue.component("createAttendance", {
     methods: {
         submit() {
             var attendanceBody = new FormData();
-            attendanceBody.append('sessionID', sessionid);
+            attendanceBody.append('sessionID', this.sessionid);
             attendanceBody.append('func', 'createAttendance');
             this.$http.post('back/Attendance.php', attendanceBody)
                 .then(response => {
-                    if (response == true) {
                         var sessionBody = new FormData();
-                        sessionBody.append('sessionID', ID);
+                        sessionBody.append('sessionID', this.sessionid);
                         sessionBody.append('func', 'getSession');
                         this.$http.post('back/SISession.php', sessionBody)
                             .then(response => {
@@ -43,7 +42,6 @@ var createAttendance = Vue.component("createAttendance", {
                             }, _ => {
                                 this.message = "Fail"
                             });
-                    }
                 }, _ => {
                     this.message = "Fail"
                 });

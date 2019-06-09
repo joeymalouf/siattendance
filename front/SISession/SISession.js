@@ -63,7 +63,7 @@ var session = Vue.component("session", {
         database() {
             var ID = this.$route.params.sessionid;
             new QRCode(document.getElementById("qrcode"), {
-                text: "https://turing.cs.olemiss.edu/~jlucas/test/SIAttendence/#/attendance/" + this.ID,
+                text: "https://turing.cs.olemiss.edu/~jlucas/test/SIAttendance/yup.php?sessionid=" + ID,
                 width: 512,
                 height: 512,
             });

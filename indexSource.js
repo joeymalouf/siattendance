@@ -3,7 +3,7 @@ Vue.use(VeeValidate);
 Vue.use(Vuetify)
 
 const routes = [{
-    path: '/',
+    path: '/AllSessions',
     component: allSessions
 },
 {
