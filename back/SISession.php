@@ -1,7 +1,7 @@
 <?php
 
-    require_once("/home/jlucas/test/public_html/SIAttendance/session.php");
-    require_once("/home/jlucas/test/public_html/SIAttendance/global_functions.php");
+    require_once("/home/jlucas/public_html/test/SIAttendance/session.php");
+    require_once("/home/jlucas/public_html/test/SIAttendance/global_functions.php");
 
     function getSession($sessionID)
     {
@@ -52,7 +52,6 @@
         }
 
         print_r(json_encode($result_session));
-    	
     }
 
     if (isset($_POST['func']) && $_POST['func'] == 'getSession') {

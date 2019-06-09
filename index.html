@@ -21,7 +21,7 @@
 <body>
     <div id="app">
         <v-app id="inspire">
-            <v-toolbar app dark color="#14213d" fixed>
+            <v-toolbar app dark color="#14213d" fixed v-if="!signUp">
                 <v-toolbar-side-icon></v-toolbar-side-icon>
                 <v-toolbar-title>SI Attendance</v-toolbar-title>
                 <v-spacer></v-spacer>
@@ -32,19 +32,20 @@
                 </v-toolbar-items>
             </v-toolbar>
             <v-content>
-                <v-container fluid fill-height>
+                <v-container fluid fill-height :style="[!signUp ? {'height': '100%'} : {'height' : '100vh'}]">
                     <v-layout justify-center align-center>
                         <router-view></router-view>
                     </v-layout>
                 </v-container>
             </v-content>
-            <v-footer app dark color="#14213d" inset>
+            <v-footer app dark color="#14213d" inset v-if="!signUp">
                 <span class="white--text">&copy; 2017</span>
             </v-footer>
         </v-app>
     </div>
 
     <script src="./front/AllSISessions/AllSISessions.js"></script>
+    <script src="./front/CreateUser/createUser.js"></script>
     <script src="./front/SISession/SISession.js"></script>
     <script src="./indexSource.js"></script>
 </body>

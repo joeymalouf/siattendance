@@ -1,0 +1,23 @@
+<v-flex xs12 sm8 md4>
+    <v-card elevation="12">
+        <v-toolbar dark color="#14213d" height="24px">
+            <v-toolbar-title>SI Sign Up</v-toolbar-title>
+            <v-spacer></v-spacer>
+        </v-toolbar>
+        <v-card-text>
+            <form>
+                <v-text-field v-model="fname" v-validate="'required|max:30'" :counter="30"
+                    :error-messages="errors.collect('fname')" label="First Name" data-vv-name="fname" required>
+                </v-text-field>
+                <v-text-field v-model="lname" v-validate="'required|max:30'" :counter="30"
+                    :error-messages="errors.collect('lname')" label="Last Name" data-vv-name="lname" required>
+                </v-text-field>
+                <v-text-field v-model="id" type="number" v-validate="'required|max:8'" :counter="8"
+                    :error-messages="errors.collect('id')" label="Student ID Number" data-vv-name="id" required>
+                </v-text-field>
+                <v-btn @click="submit">submit</v-btn>
+                <v-btn @click="clear">clear</v-btn>
+            </form>
+        </v-card-text>
+    </v-card>
+</v-flex>

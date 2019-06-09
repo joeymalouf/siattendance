@@ -1,0 +1,65 @@
+<html>
+<head>
+        <Title>SI</Title>
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
+    <script src="https://unpkg.com/vee-validate@2.0.0-rc.25/dist/vee-validate.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <script src="./qrcode.min.js"></script>
+</head>
+<body>
+    <div id="app">
+            <div id="app">
+                    <v-app id="inspire">
+                      <v-content>
+                        <v-container fluid fill-height>
+                          <v-layout align-center justify-center>
+                            <v-flex xs12 sm8 md4>
+                              <v-card class="elevation-12">
+                                <v-toolbar dark color="primary">
+                                  <v-toolbar-title>Login form</v-toolbar-title>
+                                  <v-spacer></v-spacer>
+                                  <v-tooltip bottom>
+                                    <v-btn
+                                      icon
+                                      large
+                                      :href="source"
+                                      target="_blank"
+                                      slot="activator"
+                                    >
+                                      <v-icon large>code</v-icon>
+                                    </v-btn>
+                                    <span>Source</span>
+                                  </v-tooltip>
+                                </v-toolbar>
+                                <v-card-text>
+                                  <v-form>
+                                    <v-text-field prepend-icon="person" name="login" label="Login" type="text"></v-text-field>
+                                    <v-text-field prepend-icon="lock" name="password" label="Password" id="password" type="password"></v-text-field>
+                                  </v-form>
+                                </v-card-text>
+                                <v-card-actions>
+                                  <v-spacer></v-spacer>
+                                  <v-btn color="primary">Login</v-btn>
+                                </v-card-actions>
+                              </v-card>
+                            </v-flex>
+                          </v-layout>
+                        </v-container>
+                      </v-content>
+                    </v-app>
+                  </div>
+    </div>
+    <script src="./test.js"></script>
+</body>
+
+</html>

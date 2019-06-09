@@ -10,6 +10,10 @@ const routes = [{
     path: '/session/:sessionid',
     component: session
 },
+{
+    path: '/createUser',
+    component: createUser
+},
 ];
 
 const router = new VueRouter({
@@ -19,18 +23,25 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (true) {
-        next('');
+        next();
     }
     next(false);
 })
 
 const app = new Vue({
     el: '#app',
+    $_veeValidate: {
+        validator: 'new'
+    },
     watch: {},
     data: () => ({
         drawer: null
       }),
     methods: {},
     router,
-    
+    computed: {
+        signUp() {
+            return this.$route.path === '/createUser';
+        }
+    }
 })

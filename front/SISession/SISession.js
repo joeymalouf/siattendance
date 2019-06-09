@@ -57,10 +57,10 @@ var session = Vue.component("session", {
                 }, response => {
                     this.message = "Fail"
                 });
+
             var attendanceBody = new FormData();
             attendanceBody.append('sessionID', ID);
             attendanceBody.append('func', 'getSessionAttendance');
-
             this.$http.post('back/SISession.php', attendanceBody)
                 .then(response => {
                     console.log(response.data)
@@ -75,7 +75,7 @@ var session = Vue.component("session", {
             this.qr = document.getElementById("qrcode").getElementsByTagName("img")[0].src;
             var test = 'data:text/html;charset=utf-8,' + encodeURI('<div style="display: table-cell;height: 100vh;text-align: center;width: 100vw;vertical-align: middle;"><img src="'+this.qr+'"></div>');
             var win = window.open();
-            win.document.write('<iframe src="' + this.qr + '" frameborder="0" style="width:100%; height:100%;" allowfullscreen></iframe>');
+            win.document.write('<iframe src="' + test + '" frameborder="0" style="width:100%; height:100%;" allowfullscreen></iframe>');
         }
     },
     mounted() {
