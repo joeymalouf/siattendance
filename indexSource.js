@@ -11,6 +11,10 @@ const routes = [{
     component: session
 },
 {
+    path: '/attendance/:sessionid',
+    component: createAttendance
+},
+{
     path: '/createUser',
     component: createUser
 },
@@ -34,10 +38,26 @@ const app = new Vue({
         validator: 'new'
     },
     watch: {},
-    data: () => ({
-        drawer: null
-      }),
-    methods: {},
+    data: {
+        errorMessage: '',
+        successMessage: '',
+    },
+    methods: {
+        clearSuccess () {
+            this.successMessage = null
+
+        },
+        clearError () {
+            this.errorMessage = null
+        },
+        addError(text) {
+            this.errorMessage = text
+        },
+        addSuccess(text) {
+            this.successMessage = text
+
+        }
+    },
     router,
     computed: {
         signUp() {

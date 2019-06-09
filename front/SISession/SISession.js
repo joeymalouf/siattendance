@@ -1,9 +1,8 @@
 var session = Vue.component("session", {
     template: `
-    <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
+    <v-flex xs12 md7>
       <v-card id="card">
-        <v-card-title primary-title>
+        <v-card-title primary-title style="margin-bottom: 20px" class="elevation-2">
           <div>
             <h4>Course: {{ session.course }} </h4>
             <h4>Professor: {{ session.professor }} </h4>
@@ -13,17 +12,15 @@ var session = Vue.component("session", {
         </v-card-title>
       </v-card>
       <div id="attendance"></div>
-      <v-btn color="orange" v-on:click="viewQR()" id="qrprint">View QR</v-btn></a>
-      <v-data-table :headers="headers" :items="attendances" class="elevation-1">
+      <v-data-table :headers="headers" :items="attendances" class="elevation-2" style="margin-bottom: 10px">
         <template v-slot:items="props">
-            <td>{{ props.attendance.fname }} {{ props.attendance.lname }}</td>
-            <td>{{ props.attendance.id }}</td>
-            <td><router-link :to="'/session/'+props.item.sessionid"  style="text-decoration: none;"><v-btn class="info">View</v-btn></router-link></td>
+            <td>{{ props.item.fname }} {{ props.item.lname }}</td>
+            <td>{{ props.item.id }}</td>
         </template>
     </v-data-table>
-    </v-flex>
+    <v-btn color="orange" v-on:click="viewQR()" id="qrprint">View QR</v-btn>
     <div id="qrcode" style="display:none"></div>
-  </v-layout>`,
+    </v-flex>`,
     data: function () {
         return {
             message: "Hello word",
@@ -35,14 +32,38 @@ var session = Vue.component("session", {
                 date_time: "0000-00-00 00:00:00",
             },
             qr: "",
-            attendances: [],
+            attendances: [
+                // {
+                //     fname: "j",
+                //     lname: "m",
+                //     id: "100"
+                // },
+                // {
+                //     fname: "j",
+                //     lname: "m",
+                //     id: "101"
+                // },
+
+            ],
+            headers: [
+                {
+                    text: "Name",
+                    sortable: true,
+                    value: 'name' 
+                },
+                {
+                    text: "Student ID",
+                    sortable: true,
+                    value: 'id' 
+                },
+            ],
         }
     },
     methods: {
         database() {
             var ID = this.$route.params.sessionid;
             new QRCode(document.getElementById("qrcode"), {
-                text: "https://turing.cs.olemiss.edu/~jlucas/test/SIAttendence/#/session/" + this.ID,
+                text: "https://turing.cs.olemiss.edu/~jlucas/test/SIAttendence/#/attendance/" + this.ID,
                 width: 512,
                 height: 512,
             });
@@ -64,7 +85,7 @@ var session = Vue.component("session", {
             this.$http.post('back/SISession.php', attendanceBody)
                 .then(response => {
                     console.log(response.data)
-                    this.attendances = response.data[0]
+                    this.attendances = response.data
                     this.message = "Pass"
                 }, response => {
                     this.message = "Fail"

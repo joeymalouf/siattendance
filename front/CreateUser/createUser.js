@@ -1,6 +1,6 @@
 var createUser = Vue.component("createUser", {
     template: `
-    <v-flex xs12 sm8 md4>
+    <v-flex xs12 md7>
     <v-card elevation="12">
         <v-toolbar dark color="#14213d" height="36px">
             <v-toolbar-title>SI Sign Up</v-toolbar-title>
@@ -55,6 +55,7 @@ var createUser = Vue.component("createUser", {
                 this.$http.post('back/User.php', body)
                     .then( response => {
                         console.log(response.data);
+                        router.push('/')
                     }, response => {
                         this.message = "Fail";
                         console.log(response.data);

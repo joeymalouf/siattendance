@@ -1,5 +1,6 @@
 var allSessions = Vue.component("allSessions", {
     template: `
+    <v-flex xs12 sm10 md6>
     <v-data-table :headers="headers" :items="sessions" class="elevation-1">
         <template v-slot:items="props">
             <td>{{ props.item.sessionid }}</td>
@@ -9,6 +10,7 @@ var allSessions = Vue.component("allSessions", {
             <td><router-link :to="'/session/'+props.item.sessionid"  style="text-decoration: none;"><v-btn class="info">View</v-btn></router-link></td>
         </template>
     </v-data-table>
+    </v-flex>
             `
             ,
     data: function () {
