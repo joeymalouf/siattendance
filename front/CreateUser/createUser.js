@@ -54,10 +54,10 @@ var createUser = Vue.component("createUser", {
                 body.append('func', 'createUser');
                 this.$http.post('back/User.php', body)
                     .then( response => {
-                        console.log(response);
+                        console.log(response.data);
                     }, response => {
                         this.message = "Fail";
-                        console.log(response);
+                        console.log(response.data);
                     });
             }
 
