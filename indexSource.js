@@ -15,7 +15,7 @@ const routes = [{
     component: createAttendance
 },
 {
-    path: '/currentSessions',
+    path: '/',
     component: currentSessions
 },
 {

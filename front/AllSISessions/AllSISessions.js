@@ -5,7 +5,8 @@ var allSessions = Vue.component("allSessions", {
         <template v-slot:items="props">
             <td>{{ props.item.sessionid }}</td>
             <td class="text-xs-right">{{ props.item.course }}</td>
-            <td class="text-xs-right">{{ props.item.type }}</td>
+            <td class="text-xs-right">{{ props.item.professor }}</td>
+		<td class="text-xs-right">{{ props.item.type }}</td>
             <td class="text-xs-right">{{ props.item.date_time }}</td>
             <td><router-link :to="'/session/'+props.item.sessionid"  style="text-decoration: none;"><v-btn class="info">View</v-btn></router-link></td>
         </template>
@@ -28,6 +29,11 @@ var allSessions = Vue.component("allSessions", {
                     sortable: true,
                     value: 'course' 
                 },
+		{
+                    text: "Professor",
+                    sortable: true,
+                    value: 'professor'
+                },
                 {
                     text: "Type",
                     sortable: true,
@@ -39,7 +45,7 @@ var allSessions = Vue.component("allSessions", {
                     value: 'date_time' 
                 },
                 {
-                    text: "View",
+                    text: "",
                     sortable: true,
                     value: 'view' 
                 },

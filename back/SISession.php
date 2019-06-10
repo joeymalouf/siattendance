@@ -44,8 +44,8 @@
         $Date = date("Y-m-d h:i");
         $Date = strtotime('-1 hour', strtotime($Date));
         $Date = date("Y-m-d h:i", $Date);
-        $query_sessions = $mysqli->prepare("SELECT * FROM Session WHERE date_time > ".$Date);
-        $query_sessions->bind_param("i", $sessionID);
+        $query_sessions = $mysqli->prepare("SELECT * FROM Session WHERE date_time > ?");
+        $query_sessions->bind_param("s", $Date);
         $query_sessions->execute();
         $result_sessions = get_result($query_sessions);
 
@@ -87,5 +87,8 @@
     }
     if (isset($_POST['func']) && $_POST['func'] == 'getAllSessions') {
         getAllSessions();
+    }
+	if (isset($_POST['func']) && $_POST['func'] == 'getCurrentSessions') {
+        getCurrentSessions();
     }
 ?>
