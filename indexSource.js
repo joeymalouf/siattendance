@@ -15,6 +15,10 @@ const routes = [{
     component: createAttendance
 },
 {
+    path: '/currentSessions',
+    component: currentSessions
+},
+{
     path: '/createUser',
     component: createUser
 },

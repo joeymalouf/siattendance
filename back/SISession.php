@@ -6,6 +6,7 @@
     function getSession($sessionID)
     {
         $mysqli = db_connection();
+        date_default_timezone_set('America/Chicago');
         $query_session = $mysqli->prepare("SELECT * FROM Session WHERE sessionid = ?");
         $query_session->bind_param("i", $sessionID);
         $query_session->execute();
@@ -24,6 +25,26 @@
     function getAllSessions() {
         $mysqli = db_connection();
         $query_sessions = $mysqli->prepare("SELECT * FROM Session");
+        $query_sessions->bind_param("i", $sessionID);
+        $query_sessions->execute();
+        $result_sessions = get_result($query_sessions);
+
+        if (!$result_sessions) {
+            $_SESSION["message"] = "Error! Could not get sessions.";
+            header("Location: ../front/index.php");
+            exit;
+        }
+        print_r(json_encode($result_sessions));
+
+    }
+
+    function getCurrentSessions() {
+        $mysqli = db_connection();
+        date_default_timezone_set('America/Chicago');
+        $Date = date("Y-m-d h:i");
+        $Date = strtotime('-1 hour', strtotime($Date));
+        $Date = date("Y-m-d h:i", $Date);
+        $query_sessions = $mysqli->prepare("SELECT * FROM Session WHERE date_time > ".$Date);
         $query_sessions->bind_param("i", $sessionID);
         $query_sessions->execute();
         $result_sessions = get_result($query_sessions);
