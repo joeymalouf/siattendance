@@ -61,17 +61,7 @@ var currentSessions = Vue.component("currentSessions", {
                 });
         },
         attendSession(ID) {
-            var body = new FormData();
-            body.append('sessionID', ID);
-            body.append('func', 'createAttendance');
-            this.$http.post('back/Attendance.php', body)
-                .then(response => {
-                    console.log(response.data)
-                    this.session = response.data[0]
-                    this.message = "Pass"
-                }, response => {
-                    this.message = "Fail"
-                });
+            router.push('/attendance/' + ID)
         }
     },
     beforeMount() {
