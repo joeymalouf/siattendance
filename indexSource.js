@@ -22,6 +22,10 @@ const routes = [{
     path: '/createUser',
     component: createUser
 },
+{
+    path: '/createSession',
+    component: createSession
+},
 ];
 
 const router = new VueRouter({

@@ -17,8 +17,7 @@ var createUser = Vue.component("createUser", {
                 <v-text-field v-model="id" type="number" v-validate="'required|max:8'" :counter="8"
                     :error-messages="errors.collect('id')" label="Student ID Number" data-vv-name="id" required>
                 </v-text-field>
-                <v-btn @click="submit">submit</v-btn>
-                <v-btn @click="clear">clear</v-btn>
+                <v-btn @click="submit">+ Create</v-btn>
             </v-form>
         </v-card-text>
     </v-card>
@@ -32,13 +31,13 @@ var createUser = Vue.component("createUser", {
             dictionary: {
                 custom: {
                     fname: {
-                        required: () => "First name can not be empty.",
+                        required: () => "First name cannot be empty.",
                     },
                     lname: {
-                        required: () => "Last name can not be empty.",
+                        required: () => "Last name cannot be empty.",
                     },
                     id: {
-                        required: () => "Student ID can not be empty.",
+                        required: () => "Student ID cannot be empty.",
                     },
                 }
             },
@@ -63,12 +62,6 @@ var createUser = Vue.component("createUser", {
             }
 
         },
-        clear () {
-            this.fname = ''
-            this.lname = ''
-            this.id = null
-            this.$validator.reset()
-          }
     },
     mounted () {
         this.$validator.localize('en', this.dictionary)
