@@ -8,10 +8,10 @@ var createSession = Vue.component("createSession", {
         </v-toolbar>
         <v-card-text>
             <v-form>
-                <v-select :items="courses" label="Course" v-validate="'required'"
-                    :error-messages="errors.collect('course')" data-vv-name="course" required></v-select>
-                <v-select :items="professors" label="Professor" v-validate="'required'"
-                    :error-messages="errors.collect('professor')" data-vv-name="professor" required></v-select>
+                <v-select :items="courses" label="Course" item-value="course" item-text="course" v-validate="'required'"
+                    :error-messages="errors.collect('course')" data-vv-name="course" v-model="course" required></v-select>
+                <v-select :items="professors" label="Professor" item-value="professor" item-text="professor" v-validate="'required'"
+                    :error-messages="errors.collect('professor')" data-vv-name="professor" v-model="professor" required></v-select>
                 <v-text-field v-model="type" v-validate="'required|max:30'" :counter="30"
                     :error-messages="errors.collect('type')" label="Type" data-vv-name="type" required>
                 </v-text-field>
@@ -83,22 +83,23 @@ var createSession = Vue.component("createSession", {
                 });
         },
         submit() {
+
             if (this.$validator.validateAll()) {
                 var body = new FormData();
-                body.append('fname', this.fname);
-                body.append('lname', this.lname);
-                body.append('id', this.id);
-                body.append('func', 'createUser');
-                this.$http.post('back/User.php', body)
+                body.append('course', this.course);
+                body.append('professor', this.professor);
+                body.append('type', this.type);
+                body.append('date', this.date);
+                body.append('time', this.time);
+                body.append('func', 'createSession');
+                this.$http.post('back/SISession.php', body)
                     .then(response => {
-                        console.log(response.data);
-                        router.push('/')
+                        router.push('/session/'+response.data);
                     }, response => {
                         this.message = "Fail";
                         console.log(response.data);
                     });
             }
-
         },
     },
     beforeMount() {

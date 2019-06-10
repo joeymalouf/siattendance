@@ -3,13 +3,14 @@
     require_once("/home/jlucas/public_html/test/SIAttendance/session.php");
     require_once("/home/jlucas/public_html/test/SIAttendance/global_functions.php");
 
-    function createSession($course, $professor, $type, $date_time)
+    function createSession($course, $professor, $type, $date, $time)
     {
         $mysqli = db_connection();
+	
+	$date_time = date("Y-m-d H:i:s", strtotime($date." ".$time));
 
         $query_session_exists = $mysqli->prepare("SELECT * FROM Session WHERE course = ? AND professor = ? AND type = ? AND date_time = ?");
-        $date_time = strtotime($date_time);
-        $date_time = date('Y-m-d H:i:s', $date_time);
+	        
         $query_session_exists->bind_param("ssss", $course, $professor, $type, $date_time);
         $query_session_exists->execute();
         $result_session_exists = get_result($query_session_exists);
@@ -23,7 +24,7 @@
         $query_add_session->bind_param('ssss', $course, $professor, $type, $date_time);
         $execute = $query_add_session->execute();
         if ($execute) {
-            print_r("Session has been added");
+            print_r($query_add_session->insert_id);
             exit;
         } else {
             print_r("Error, session could not be added.");
@@ -35,8 +36,8 @@
     {
         $mysqli = db_connection();
 
-        $query_courses = $mysql->prepare("SELECT * FROM course");
-        $query_courses->execute();
+        $query_courses = $mysqli->prepare("SELECT * FROM Course");
+	$query_courses->execute();
         $result_courses = get_result($query_courses);
 
         if ($result_courses) {
@@ -49,10 +50,10 @@
     function getCourseProfessors($course)
     {
         $mysqli = db_connection();
-
+	
         $query_professors = $mysqli->prepare("SELECT professor FROM Class WHERE course = ?");
-        $query_professors = $mysqli->bind_param("s", $course);
-        $query_professors->execute();
+	$query_professors->bind_param("s", $course);
+	$query_professors->execute();
         $result_professors = get_result($query_professors);
 
         if ($result_professors) {
@@ -150,8 +151,8 @@
         getCurrentSessions();
     } 
     elseif (isset($_POST['func']) && $_POST['func'] == 'createSession') {
-        if (isset($_POST['course']) && isset($_POST['professor']) && isset($_POST['type']) && isset($_POST['date_time'])) {
-            createSession($_POST['course'], $_POST['professor'], $_POST['type'], $_POST['date_time']);
+        if (isset($_POST['course']) && isset($_POST['professor']) && isset($_POST['type']) && isset($_POST['date']) && isset($_POST['time'])) {
+            createSession($_POST['course'], $_POST['professor'], $_POST['type'], $_POST['date'], $_POST['time']);
         } 
         else {
             print_r("Error, bad data");
