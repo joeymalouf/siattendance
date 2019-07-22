@@ -68,7 +68,6 @@ var session = Vue.component("session", {
             body.append('func', 'getSession');
             this.$http.post('back/SISession.php', body)
                 .then(response => {
-                    console.log(response.data)
                     this.session = response.data[0]
                     this.message = "Pass"
                 }, response => {
@@ -80,7 +79,6 @@ var session = Vue.component("session", {
             attendanceBody.append('func', 'getSessionAttendance');
             this.$http.post('back/SISession.php', attendanceBody)
                 .then(response => {
-                    console.log(response.data)
                     this.attendances = response.data
                     this.message = "Pass"
                 }, response => {
@@ -102,8 +100,10 @@ var session = Vue.component("session", {
             height: 512,
         });
         this.database();
-        window.setInterval(() => {
-            this.database();
-        },5000);
+     	this.$nextTick(function () {
+            window.setInterval(() => {
+                this.database();
+            }, 5000);
+        })
     },
 });
