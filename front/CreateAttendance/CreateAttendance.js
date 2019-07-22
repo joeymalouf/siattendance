@@ -16,13 +16,14 @@ var createAttendance = Vue.component("createAttendance", {
         return {
             sessionid: this.$route.params.sessionid,
             session: {
-                sessionid: 2,
-                course: "Chem 105",
-                type: "Lecture Review",
-                professor: "ONeal",
-                date_time: "0000-00-00 00:00:00",
+                sessionid: 0,
+                course: "Session not found",
+                type: "Session not found",
+                professor: "Session not found",
+                date_time: "Session not found",
             },
-            message: '',
+            error: "",
+            success: "",
         }
     },
     methods: {
@@ -38,15 +39,23 @@ var createAttendance = Vue.component("createAttendance", {
                         this.$http.post('back/SISession.php', sessionBody)
                             .then(response => {
                                 this.session = response.data[0]
-                                this.message = "Pass"
+                                this.success = "You've been added to the session."
+                                this.passSuccessMessage();
                             }, _ => {
-                                this.message = "Fail"
+                                this.error = "Could not retrieve session data from server."
+                                this.passErrorMessage();
                             });
                 }, _ => {
-                    this.message = "Fail"
+                    this.error = "Could not find session. Try again or contact SI leader."
+                    this.passErrorMessage();
                 });
         },
-
+        passErrorMessage() {
+            this.$emit('pass-error-message', this.error)
+        },
+        passSuccessMessage() {
+            this.$emit('pass-success-message', this.success)
+        },
     },
     mounted() {
         this.submit();

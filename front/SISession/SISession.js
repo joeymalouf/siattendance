@@ -30,6 +30,7 @@ var session = Vue.component("session", {
                 type: "Lecture Review",
                 professor: "ONeal",
                 date_time: "0000-00-00 00:00:00",
+                polling: null,
             },
             qr: "",
             attendances: [
@@ -62,11 +63,6 @@ var session = Vue.component("session", {
     methods: {
         database() {
             var ID = this.$route.params.sessionid;
-            new QRCode(document.getElementById("qrcode"), {
-                text: "https://turing.cs.olemiss.edu/~jlucas/test/SIAttendance/yup.php?sessionid=" + ID,
-                width: 512,
-                height: 512,
-            });
             var body = new FormData();
             body.append('sessionID', ID);
             body.append('func', 'getSession');
@@ -91,7 +87,6 @@ var session = Vue.component("session", {
                     this.message = "Fail"
                 });
         },
-
         viewQR() {
             this.qr = document.getElementById("qrcode").getElementsByTagName("img")[0].src;
             var test = 'data:text/html;charset=utf-8,' + encodeURI('<div style="display: table-cell;height: 100vh;text-align: center;width: 100vw;vertical-align: middle;"><img src="'+this.qr+'"></div>');
@@ -100,6 +95,15 @@ var session = Vue.component("session", {
         }
     },
     mounted() {
+        var ID = this.$route.params.sessionid;
+        new QRCode(document.getElementById("qrcode"), {
+            text: "https://turing.cs.olemiss.edu/~jlucas/test/SIAttendance/yup.php?sessionid=" + ID,
+            width: 512,
+            height: 512,
+        });
         this.database();
-    }
+        window.setInterval(() => {
+            this.database();
+        },5000);
+    },
 });

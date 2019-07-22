@@ -53,7 +53,6 @@ const app = new Vue({
     methods: {
         clearSuccess () {
             this.successMessage = null
-
         },
         clearError () {
             this.errorMessage = null
