@@ -100,16 +100,10 @@ var session = Vue.component("session", {
             height: 512,
         });
         this.database();
-<<<<<<< HEAD
-        window.setInterval(() => {
-            this.database();
-        }, 5000);
-=======
      	this.$nextTick(function () {
             window.setInterval(() => {
                 this.database();
             }, 5000);
         })
->>>>>>> 05268e6132d682eaa1c87b4eb434e7d3c999699e
     },
 });
