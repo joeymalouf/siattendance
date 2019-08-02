@@ -1,4 +1,4 @@
-import AuthorizationService from 'back/AuthorizationService'
+import { AuthorizationService } from 'back/AuthorizationService'
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);

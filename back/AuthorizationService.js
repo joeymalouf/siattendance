@@ -1,6 +1,6 @@
-import MessageService from 'MessageService';
+import { MessageService } from 'MessageService';
 
-export default class AuthenticationService {
+export default class AuthorizationService {
 
     checkRole() {
         var role = "student";
