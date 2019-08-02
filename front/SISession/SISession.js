@@ -104,6 +104,6 @@ var session = Vue.component("session", {
         this.database();
         window.setInterval(() => {
             this.database();
-        },5000);
+        }, 5000);
     },
 });

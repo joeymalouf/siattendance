@@ -1,6 +1,9 @@
+import AuthorizationService from 'back/AuthorizationService'
+
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
 Vue.use(Vuetify)
+
 
 const routes = [{
     path: '/AllSessions',
@@ -8,7 +11,10 @@ const routes = [{
 },
 {
     path: '/session/:sessionid',
-    component: session
+    component: session,
+    beforeRouterEnter () {
+
+    },
 },
 {
     path: '/attendance/:sessionid',
@@ -26,6 +32,23 @@ const routes = [{
     path: '/createSession',
     component: createSession
 },
+{
+    path: '/leader',
+    component: leader,
+    beforeEnter: (to, from, next) => {
+        var role = AuthorizationService.checkRole();
+        if (role == "leader" || role == "mentor" || role ==  "admin") {
+            next()
+        }
+        next(false)
+    },
+    children: [
+        {
+            path: '/home',
+            component: leaderHome
+        }
+    ]
+}
 ];
 
 const router = new VueRouter({
