@@ -1,7 +1,11 @@
-import { MessageService } from 'MessageService';
 
-export default class AuthorizationService {
+import { MessageService } from './MessageService';
 
+export class AuthorizationService {
+	
+	constructor() {
+
+	}
     checkRole() {
         var role = "student";
         var body = new FormData();

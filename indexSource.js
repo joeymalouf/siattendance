@@ -1,4 +1,4 @@
-import {AuthorizationService} from 'back/AuthorizationService'
+import {AuthorizationService} from './back/AuthorizationService'
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
@@ -34,7 +34,7 @@ const routes = [{
 },
 {
     path: '/leader',
-    component: leader,
+    component: LeaderHome,
     beforeEnter: (to, from, next) => {
         var role = AuthorizationService.checkRole();
         if (role == "leader" || role == "mentor" || role ==  "admin") {
@@ -45,7 +45,7 @@ const routes = [{
     children: [
         {
             path: '/home',
-            component: leaderHome
+            component: LeaderHome
         }
     ]
 }
@@ -68,23 +68,31 @@ const app = new Vue({
     $_veeValidate: {
         validator: 'new'
     },
+	vuetify: new Vuetify(),
+
     watch: {},
     data: {
         errorMessage: '',
         successMessage: '',
+	errorShow: false,
+	successShow: false,
     },
     methods: {
         clearSuccess () {
             this.successMessage = null
+	    this.successShow = false
         },
         clearError () {
             this.errorMessage = null
+	    this.errorShow = false
         },
         addError(text) {
             this.errorMessage = text
+	    this.errorShow = true
         },
         addSuccess(text) {
             this.successMessage = text
+	    this.successShow = true
 
         }
     },
@@ -92,6 +100,10 @@ const app = new Vue({
     computed: {
         signUp() {
             return this.$route.path === '/createUser';
-        }
-    }
+	}    
+},
+    mounted() {
+
+	}
+
 })

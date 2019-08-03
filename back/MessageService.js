@@ -1,9 +1,10 @@
 
-export default class MessageService {
+export class MessageService {
 
     constructor() {
         this.errorMessage = ""
         this.successMessage = ""
     }
-
+	test() {
+}
 }

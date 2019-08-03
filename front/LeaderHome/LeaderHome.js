@@ -1,4 +1,4 @@
-var leaderHome = Vue.component("LeaderHome", {
+var LeaderHome = Vue.component("LeaderHome", {
     template: `
     <v-flex xs12 sm10 md6>
     <v-data-table :headers="headers" :items="sessions" class="elevation-1">
