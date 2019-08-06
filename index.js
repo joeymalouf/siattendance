@@ -1,4 +1,9 @@
 import {AuthorizationService} from './back/AuthorizationService'
+import Vue from 'vue'
+import App from './src/App'
+import VueRouter from 'vue-router'
+import Vuetify from 'vuetify/lib'
+import VeeValidate from 'vee-validate'
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
@@ -63,8 +68,9 @@ router.beforeEach((to, from, next) => {
     next(false);
 })
 
-const app = new Vue({
+new Vue({
     el: '#app',
+    components: { App },
     $_veeValidate: {
         validator: 'new'
     },
