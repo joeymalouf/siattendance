@@ -12,13 +12,12 @@
             </v-toolbar>
     -->
     <v-app-bar app color="#14213d" dark>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>SI Attendance</v-toolbar-title>
     </v-app-bar>
     <v-content>
-      <v-container fluid fill-height :style="[!signUp ? {'height': '100%'} : {'height' : '100vh'}]">
-        <v-layout row justify-center align-center wrap>
-          <v-flex xs12 sm10 md7 style="margin-bottom: 15px;">
+      <v-container fluid :style="[!signUp ? {'height': '100%'} : {'height' : '100vh'}]">
+        <v-layout row justify-center wrap>
+          <v-flex xs12 sm11 md7 style="margin-bottom: 15px;" align-start>
             <v-alert :value="successShow" type="success">
               {{ successMessage }}
               <a style="float: right" v-on:click="clearSuccess()">
@@ -26,7 +25,7 @@
               </a>
             </v-alert>
           </v-flex>
-          <v-flex xs12 sm10 md7 style="margin-bottom: 15px;">
+          <v-flex xs12 sm11 md7 style="margin-bottom: 15px;" align-start>
             <div>
               <v-alert :value="errorShow" type="error">
                 {{ errorMessage }}
@@ -83,6 +82,7 @@ export default {
   },
   mounted() {
     this.addSuccess("toast");
+    this.addError("toast");
   }
 };
 </script>

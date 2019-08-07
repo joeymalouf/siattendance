@@ -15,57 +15,67 @@ import App from './App'
 import VueRouter from 'vue-router'
 import vuetify from '@/plugins/vuetify'
 import VeeValidate from 'vee-validate'
+import axios from 'axios';
 import AllSessions from './pages/AllSISessions'
+import CreateUser from './pages/CreateUser'
+import CreateAttendance from './pages/CreateAttendance'
+import CreateSession from './pages/CreateSession'
+import Session from './pages/SISession'
+import CurrentSessions from './pages/CurrentSessions'
+import LeaderHome from './pages/LeaderHome'
+
+import {AuthorizationService} from './services/AuthorizationService'
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
 Vue.use(vuetify)
+Vue.prototype.$http = axios
 
 
 const routes = [{
   path: '/AllSessions',
   component: AllSessions
 },
-// {
-//   path: '/session/:sessionid',
-//   component: session,
-//   beforeRouterEnter() {
+{
+  path: '/Session/:sessionid',
+  component: Session,
+  beforeRouterEnter() {
 
-//   },
-// },
-// {
-//   path: '/attendance/:sessionid',
-//   component: createAttendance
-// },
-// {
-//   path: '/',
-//   component: currentSessions
-// },
-// {
-//   path: '/createUser',
-//   component: createUser
-// },
-// {
-//   path: '/createSession',
-//   component: createSession
-// },
-// {
-//   path: '/leader',
-//   component: LeaderHome,
-//   beforeEnter: (to, from, next) => {
-//     var role = AuthorizationService.checkRole();
-//     if (role == "leader" || role == "mentor" || role == "admin") {
-//       next()
-//     }
-//     next(false)
-//   },
-//   children: [
-//     {
-//       path: '/home',
-//       component: LeaderHome
-//     }
-//   ]
-// },
+  },
+},
+{
+  path: '/attendance/:sessionid',
+  component: CreateAttendance
+},
+{
+  path: '/',
+  component: CurrentSessions
+},
+{
+  path: '/CreateUser',
+  component: CreateUser
+},
+{
+  path: '/CreateSession',
+  component: CreateSession
+},
+{
+  path: '/Leader',
+  component: LeaderHome,
+  beforeEnter: (to, from, next) => {
+    var role = AuthorizationService.checkRole();
+    if (role == "leader" || role == "mentor" || role == "admin") {
+      next()
+    }
+    next(false)
+  },
+  children: [
+    {
+      path: '/Home',
+      component: LeaderHome
+    }
+  ]
+},
 ];
 
 const router = new VueRouter({

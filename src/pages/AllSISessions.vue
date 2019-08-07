@@ -55,42 +55,29 @@ export default {
           value: "view"
         }
       ]
-    };
+    }
   },
   methods: {
     database() {
-      var ID = 2;
-      console.log(ID);
-      var body = new FormData();
-      body.append("func", "getAllSessions");
-      this.$http.post("back/SISession.php", body).then(
-        response => {
-          console.log(response.data);
-          this.sessions = response.data;
-          this.message = "All Session Pass";
-        },
-        () => {
-          this.message = "All Session Fail";
-        }
-      );
-    },
-    viewSession(ID) {
-      var body = new FormData();
-      body.append("sessionID", ID);
-      body.append("func", "getSession");
-      this.$http.post("back/SISession.php", body).then(
-        response => {
-          console.log(response.data);
-          this.session = response.data[0];
-          this.message = "Pass";
-        },
-        () => {
-          this.message = "Fail";
-        }
-      );
+      var ID = 2
+      console.log(ID)
+      var body = new FormData()
+      body.append("func", "getAllSessions")
+      this.$http
+        .post("./back/SISession.php", body)
+        .then(response => {
+          console.log(response.data)
+          this.sessions = response.data
+          this.message = "All Session Pass"
+        })
+        .catch(error => {
+          console.log(error)
+          this.message = "All Session Fail"
+        })
     }
   },
   beforeMount() {
-    this.database();
+    this.database()
   }
-};
+}
+</script>
