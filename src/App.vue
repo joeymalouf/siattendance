@@ -81,8 +81,7 @@ export default {
     }
   },
   mounted() {
-    this.addSuccess("toast");
-    this.addError("toast");
+
   }
 };
 </script>

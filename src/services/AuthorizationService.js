@@ -1,25 +1,25 @@
 
-import { MessageService } from './MessageService';
+import axios from 'axios'
 
 export class AuthorizationService {
-	
-	constructor() {
 
-	}
-    checkRole() {
+    constructor() {
+    }
+
+    async checkRole() {
         var role = "student";
         var body = new FormData();
         body.append('func', 'getRole');
-        this.$http.post('back/Authentication.php', body)
-            .done(response => {
-                role = response.data[0]
-                return role;
-            }, response => {
-                if (response)
-                    MessageService.errorMessage = response;
-                else 
-                    MessageService.errorMessage = "An unknown error occured"
-                return role
-            });
+        try {
+            var res = await axios.post('back/Authentication.php', body)
+            return res;
+        }
+        catch (e) {
+
+            return role
+        }
+    }
+    async setRole() {
+        return "dude"
     }
 }

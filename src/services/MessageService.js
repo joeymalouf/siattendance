@@ -1,10 +1,14 @@
 
 export class MessageService {
 
-    constructor() {
-        this.errorMessage = ""
-        this.successMessage = ""
+    constructor(vue) {
+        this.vue = vue 
     }
-	test() {
-}
+    passErrorMessage(error) {
+        this.vue.$emit("pass-error-message", error)
+    }
+    passSuccessMessage(success) {
+        this.vue.$emit("pass-success-message", success)
+    }
+
 }

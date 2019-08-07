@@ -55,18 +55,14 @@ export default {
     },
     methods: {
         database() {
-            var ID = 2
-            console.log(ID)
             var body = new FormData()
-            body.append('func', 'getLeaderSessions')
+            body.append('func', 'leaderSessions')
             this.$http.post('back/Leader.php', body)
                 .then(response => {
                     console.log(response.data)
                     this.sessions = response.data
-                    this.message = "All Session Pass"
                 }).
                  catch(error => {
-                    this.message = "All Session Fail"
                     console.log(error)
                 })
         },

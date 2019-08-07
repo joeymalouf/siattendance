@@ -23,14 +23,17 @@ import CreateSession from './pages/CreateSession'
 import Session from './pages/SISession'
 import CurrentSessions from './pages/CurrentSessions'
 import LeaderHome from './pages/LeaderHome'
-
-import {AuthorizationService} from './services/AuthorizationService'
+import MentorHome from './pages/MentorHome'
+import { AuthorizationService } from './services/AuthorizationService'
+import { HttpStatusCodeHandler } from './handlers/HttpStatusCodeHandler'
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
 Vue.use(vuetify)
+
 Vue.prototype.$http = axios
 
+const authorizationService = new AuthorizationService()
 
 const routes = [{
   path: '/AllSessions',
@@ -62,19 +65,43 @@ const routes = [{
 {
   path: '/Leader',
   component: LeaderHome,
-  beforeEnter: (to, from, next) => {
-    var role = AuthorizationService.checkRole();
+  beforeEnter: async (to, from, next) => {
+    console.log(HttpStatusCodeHandler(404));
+    var role = await authorizationService.checkRole()
     if (role == "leader" || role == "mentor" || role == "admin") {
       next()
     }
-    next(false)
-  },
-  children: [
-    {
-      path: '/Home',
-      component: LeaderHome
+    else {
+      console.log(2)
+      next(false)
     }
-  ]
+  },
+  // children: [
+  //   {
+  //     path: '/',
+  //     component: LeaderHome
+  //   }
+  // ]
+},
+{
+  path: '/Mentor',
+  component: MentorHome,
+  beforeEnter: async (to, from, next) => {
+    console.log(HttpStatusCodeHandler(404));
+    var role = await authorizationService.checkRole()
+    if (role == "mentor" || role == "admin") {
+      next()
+    }
+    else {
+      next(false)
+    }
+  },
+  // children: [
+  //   {
+  //     path: '/',
+  //     component: LeaderHome
+  //   }
+  // ]
 },
 ];
 

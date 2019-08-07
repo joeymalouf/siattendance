@@ -12,8 +12,7 @@
         $query_user_exists->execute();
         $result_user_exists = get_result($query_user_exists);
         if ($result_user_exists) {
-            print_r(json_encode("Error! User account already exists"));
-            header("Location: ../");
+            print_r("Error! User account already exists");
             exit;
         }
         
@@ -24,7 +23,6 @@
 
         if (!$result_add_user) {
             print_r($result_add_user);
-            header("Location: ../");
             exit;
         }
         print_r($result_add_user);
@@ -38,3 +36,5 @@
     } else {
         print_r(json_encode("Bad input"));
     }
+
+?>

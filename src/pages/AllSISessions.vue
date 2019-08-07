@@ -71,7 +71,7 @@ export default {
           this.message = "All Session Pass"
         })
         .catch(error => {
-          console.log(error)
+          console.log(error.status)
           this.message = "All Session Fail"
         })
     }
