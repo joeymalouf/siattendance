@@ -1,7 +1,7 @@
 <?php
 
-    require_once("/home/jlucas/public_html/test/SIAttendance/session.php");
-    require_once("/home/jlucas/public_html/test/SIAttendance/global_functions.php");
+    require_once("/home/jlucas/public_html/test/SIAttendance/back/session.php");
+    require_once("/home/jlucas/public_html/test/SIAttendance/back/global_functions.php");
 
     function isLeader($uid) {
 

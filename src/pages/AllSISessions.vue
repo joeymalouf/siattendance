@@ -1,33 +1,42 @@
 <template>
   <v-flex xs12 sm10 md6>
     <v-data-table :headers="headers" :items="sessions" class="elevation-1">
-      <template v-slot:items="props">
-        <td>{{ props.item.sessionid }}</td>
-        <td class="text-xs-right">{{ props.item.course }}</td>
-        <td class="text-xs-right">{{ props.item.professor }}</td>
-        <td class="text-xs-right">{{ props.item.type }}</td>
-        <td class="text-xs-right">{{ props.item.date_time }}</td>
-        <td>
-          <router-link :to="'/session/'+props.item.sessionid" style="text-decoration: none;">
-            <v-btn class="info">View</v-btn>
-          </router-link>
-        </td>
+      <template v-slot:item.view="{ item }">
+        <router-link :to="'/session/'+ item.sessionid " style="text-decoration: none;">
+          <v-btn class="info">View</v-btn>
+        </router-link>
       </template>
     </v-data-table>
   </v-flex>
 </template>
 <script>
+import { statusCodeHandler } from '../handlers/HttpStatusCodeHandler'
+
 export default {
   name: "AllSessions",
   data() {
     return {
-      message: "Hello word",
-      sessions: [],
+      sessions: [
+        {
+          course: "No data",
+          type: "No data",
+          date_time: "No data",
+          sessionid: "No data",
+          professor: "No data"
+        },
+        {
+          course: "No data",
+          type: "No data",
+          date_time: "No data",
+          sessionid: "No data",
+          professor: "No data"
+        }
+      ],
       headers: [
         {
           text: "ID",
           sortable: true,
-          value: "id"
+          value: "sessionid"
         },
         {
           text: "Course",
@@ -54,30 +63,36 @@ export default {
           sortable: true,
           value: "view"
         }
-      ]
+      ],
+      error: "",
+      success: "",
     }
   },
   methods: {
     database() {
-      var ID = 2
-      console.log(ID)
-      var body = new FormData()
-      body.append("func", "getAllSessions")
+      var body = new FormData();
+      body.append("func", "getAllSessions");
       this.$http
         .post("./back/SISession.php", body)
         .then(response => {
-          console.log(response.data)
-          this.sessions = response.data
-          this.message = "All Session Pass"
+          console.log(response.data);
+          this.sessions = response.data;
         })
         .catch(error => {
-          console.log(error.status)
-          this.message = "All Session Fail"
-        })
+          console.log(statusCodeHandler(error.response.status))
+          this.error = "Could not find sessions."
+          this.passErrorMessage()
+        });
+    },
+    passErrorMessage() {
+      this.$emit("pass-error-message", this.error);
+    },
+    passSuccessMessage() {
+      this.$emit("pass-success-message", this.success);
     }
   },
   beforeMount() {
-    this.database()
+    this.database();
   }
-}
+};
 </script>

@@ -125,7 +125,7 @@ export default {
     var ID = this.$route.params.sessionid;
     new QRCode(document.getElementById("qrcode"), {
       text:
-        "https://turing.cs.olemiss.edu/~jlucas/test/SIAttendance/yup.php?sessionid=" +
+        "https://turing.cs.olemiss.edu/~jlucas/test/SIAttendance/back/yup.php?sessionid=" +
         ID,
       width: 512,
       height: 512

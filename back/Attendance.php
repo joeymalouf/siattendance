@@ -12,7 +12,6 @@
         $result_attendance_exists = get_result($query_attendance_exists);
         if ($result_attendance_exists) {
             print_r(json_encode("Error! User attendance already exists"));
-            header("Location: ../");
             exit;
         }
         
@@ -22,7 +21,6 @@
 
         if (!$result_add_attendance) {
             print_r(json_encode($result_add_attendance));
-            header("Location: ../");
             exit;
         }
         print_r(json_encode($result_add_attendance));

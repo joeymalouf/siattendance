@@ -12,6 +12,7 @@ export class AuthorizationService {
         body.append('func', 'getRole');
         try {
             var res = await axios.post('back/Authentication.php', body)
+            console.log(res)
             return res;
         }
         catch (e) {

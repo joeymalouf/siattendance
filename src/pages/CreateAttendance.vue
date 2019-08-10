@@ -3,10 +3,10 @@
     <v-card id="card">
       <v-card-title primary-title style="margin-bottom: 20px" class="elevation-2">
         <div>
-          <h4>Course: {{ session.course }}</h4>
-          <h4>Professor: {{ session.professor }}</h4>
-          <h4>Type: {{ session.type }}</h4>
-          <h4>Date/Time: {{ session.date_time }}</h4>
+          <b>Course: </b>{{ session.course }}
+          <h4>Professor: </h4>{{ session.professor }}
+          <h4>Type: </h4>{{ session.type }}
+          <h4>Date/Time: </h4>{{ session.date_time }}
         </div>
       </v-card-title>
     </v-card>
@@ -26,7 +26,7 @@ export default {
         date_time: "Session not found"
       },
       error: "",
-      success: ""
+      success: "",
     }
   },
   methods: {
@@ -40,7 +40,6 @@ export default {
           var sessionBody = new FormData()
           sessionBody.append("sessionID", this.sessionid)
           sessionBody.append("func", "getSession")
-          console.log(response)
           this.$http
             .post("back/SISession.php", sessionBody)
             .then(response => {
@@ -56,7 +55,7 @@ export default {
         })
         .catch(error => {
           this.error =
-            "Could not find session. Try again or contact SI leader."
+            "Could not find session. Session ID in URL ( "+ this.sessionid +" ) may be incorrect"
           this.passErrorMessage()
           console.log(error)
         })

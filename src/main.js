@@ -25,7 +25,6 @@ import CurrentSessions from './pages/CurrentSessions'
 import LeaderHome from './pages/LeaderHome'
 import MentorHome from './pages/MentorHome'
 import { AuthorizationService } from './services/AuthorizationService'
-import { HttpStatusCodeHandler } from './handlers/HttpStatusCodeHandler'
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
@@ -66,8 +65,7 @@ const routes = [{
   path: '/Leader',
   component: LeaderHome,
   beforeEnter: async (to, from, next) => {
-    console.log(HttpStatusCodeHandler(404));
-    var role = await authorizationService.checkRole()
+    var role = await authorizationService.checkRole().data
     if (role == "leader" || role == "mentor" || role == "admin") {
       next()
     }
@@ -87,8 +85,8 @@ const routes = [{
   path: '/Mentor',
   component: MentorHome,
   beforeEnter: async (to, from, next) => {
-    console.log(HttpStatusCodeHandler(404));
     var role = await authorizationService.checkRole()
+    role = role.data
     if (role == "mentor" || role == "admin") {
       next()
     }
