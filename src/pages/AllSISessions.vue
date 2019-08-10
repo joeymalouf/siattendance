@@ -75,12 +75,10 @@ export default {
       this.$http
         .post("./back/SISession.php", body)
         .then(response => {
-          console.log(response.data);
           this.sessions = response.data;
         })
         .catch(error => {
-          console.log(statusCodeHandler(error.response.status))
-          this.error = "Could not find sessions."
+          this.error = statusCodeHandler(error.response.status) + "Could not find sessions."
           this.passErrorMessage()
         });
     },

@@ -65,12 +65,11 @@ const routes = [{
   path: '/Leader',
   component: LeaderHome,
   beforeEnter: async (to, from, next) => {
-    var role = await authorizationService.checkRole().data
-    if (role == "leader" || role == "mentor" || role == "admin") {
+    var role = await authorizationService.checkRole()
+    if (role == "student" || role == "mentor" || role == "admin") {
       next()
     }
     else {
-      console.log(2)
       next(false)
     }
   },

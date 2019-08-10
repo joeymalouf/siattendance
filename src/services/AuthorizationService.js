@@ -11,9 +11,8 @@ export class AuthorizationService {
         var body = new FormData();
         body.append('func', 'getRole');
         try {
-            var res = await axios.post('back/Authentication.php', body)
-            console.log(res)
-            return res;
+            var res = await axios.post('back/Authorization.php', body)
+            return res.data;
         }
         catch (e) {
 

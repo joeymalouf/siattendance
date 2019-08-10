@@ -132,7 +132,6 @@ export default {
         })
         .catch(error => {
           this.message = "Fail"
-          console.log(error)
         });
     }
   },
@@ -143,12 +142,10 @@ export default {
       this.$http
         .post("back/SISession.php", body)
         .then(response => {
-          console.log(response.data)
           this.courses = response.data
         })
         .catch(error => {
           this.message = "Fail"
-          console.log(error)
         });
     },
     submit() {
@@ -167,7 +164,6 @@ export default {
           })
           .catch(error => {
             this.message = "Fail";
-            console.log(error)
           })
       }
     }

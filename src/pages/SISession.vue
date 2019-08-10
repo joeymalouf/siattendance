@@ -27,8 +27,6 @@
   </v-flex>
 </template>
 <script>
-// var code = require('qrcodejs')
-// console.log(code.QRCode)
 import QRCode from "qrcodejs2";
 
 export default {
@@ -85,7 +83,6 @@ export default {
         })
         .catch(error => {
           this.message = "Fail";
-          console.log(error);
         });
 
       var attendanceBody = new FormData();
@@ -99,7 +96,6 @@ export default {
         })
         .catch(error => {
           this.message = "Fail";
-          console.log(error);
         });
     },
     viewQR() {

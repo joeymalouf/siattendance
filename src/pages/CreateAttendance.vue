@@ -50,14 +50,12 @@ export default {
             .catch(error => {
               this.error = "Could not retrieve session data from server."
               this.passErrorMessage()
-              console.log(error)
             })
         })
         .catch(error => {
           this.error =
             "Could not find session. Session ID in URL ( "+ this.sessionid +" ) may be incorrect"
           this.passErrorMessage()
-          console.log(error)
         })
     },
     passErrorMessage() {

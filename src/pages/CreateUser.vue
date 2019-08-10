@@ -50,12 +50,10 @@ export default {
         body.append("func", "createUser");
         this.$http.post("./back/User.php", body).then(
           response => {
-            console.log(response.data);
             this.$router.push("/");
           })
           .catch(error => {
             this.message = "Fail";
-            console.log(error.data);
           });
       }
     },

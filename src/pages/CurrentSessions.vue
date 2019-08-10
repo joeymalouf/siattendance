@@ -54,12 +54,10 @@ export default {
             body.append('func', 'getCurrentSessions')
             this.$http.post('back/SISession.php', body)
                 .then(response => {
-                    console.log(response.data)
                     this.sessions = response.data
                     this.message = "Current Session Pass"
                 }).catch(error => {
                     this.message = "Current Session Fail"
-                    console.log(error)
                 })
         },
         attendSession(ID) {
