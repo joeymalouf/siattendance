@@ -23,6 +23,8 @@ export default {
   name: "LeaderHome",
   data() {
     return {
+      error: "",
+      success: "",
       search: "",
       sessions: [
         {

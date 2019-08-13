@@ -111,29 +111,31 @@ const router = new VueRouter({
   routes // short for `routes: routes`,
 })
 
-router.beforeEach(async (to, from, next) => {
-  if (to.path == "/error") {
-    next()
-  }
-  var user = "nope"
-  try {
-    user = await authorizationService.checkAccountExists()
-    console.log(user)
-    if (user == true) {
-      next()
-    }
-    else if (user == false) {
-      next('/CreateUser')
-    }
-    else {
-      next('/error')
-    }
-  }
-  catch (e) {
-    console.log(e)
-    next('/error')
-  }
-})
+// router.beforeEach(async (to, from, next) => {
+//   if (to.path == "/error") {
+//     next()
+//   }
+//   if (to.path == "/CreateUser") {
+//     next()
+//   }
+//   var user = "nope"
+//   try {
+//     user = await authorizationService.checkAccountExists()
+//     if (user == true) {
+//       next()
+//     }
+//     else if (user == false) {
+//       next('/CreateUser')
+//     }
+//     else {
+//       next('/error')
+//     }
+//   }
+//   catch (e) {
+//     console.log(e)
+//     next('/error')
+//   }
+// })
 
 new Vue({
   el: '#app',
