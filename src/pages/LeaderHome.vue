@@ -1,21 +1,29 @@
 <template>
   <v-flex xs12 sm10 md6>
-    <v-data-table :headers="headers" :items="sessions" class="elevation-1">
-      <template v-slot:item.view="{ item }">
-        <router-link :to="'/session/'+item.sessionid" style="text-decoration: none;">
-          <v-btn class="info">View</v-btn>
-        </router-link>
-      </template>
-    </v-data-table>
+    <v-card>
+      <v-card-title>
+        Sessions
+        <v-spacer></v-spacer>
+        <v-text-field v-model="search" appendIcon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
+      </v-card-title>
+      <v-data-table :headers="headers" :items="sessions" :search="search" class="elevation-1">
+        <template v-slot:item.view="{ item }">
+          <router-link :to="'/session/'+item.sessionid" style="text-decoration: none;">
+            <v-btn class="info">View</v-btn>
+          </router-link>
+        </template>
+      </v-data-table>
+    </v-card>
   </v-flex>
 </template>
 <script>
-import { statusCodeHandler } from '../handlers/HttpStatusCodeHandler'
+import { statusCodeHandler } from "../handlers/HttpStatusCodeHandler";
 
 export default {
   name: "LeaderHome",
   data() {
     return {
+      search: "",
       sessions: [
         {
           course: "No data",
@@ -76,8 +84,10 @@ export default {
           this.sessions = response.data;
         })
         .catch(error => {
-          this.error = statusCodeHandler(error.response.status) + "Could not find sessions."
-          this.passErrorMessage()
+          this.error =
+            statusCodeHandler(error.response.status) +
+            "Could not find sessions.";
+          this.passErrorMessage();
         });
     },
     passErrorMessage() {

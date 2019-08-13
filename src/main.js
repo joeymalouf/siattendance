@@ -24,6 +24,7 @@ import Session from './pages/SISession'
 import CurrentSessions from './pages/CurrentSessions'
 import LeaderHome from './pages/LeaderHome'
 import MentorHome from './pages/MentorHome'
+import error from './pages/Error'
 import { AuthorizationService } from './services/AuthorizationService'
 
 Vue.use(VueRouter);
@@ -66,7 +67,7 @@ const routes = [{
   component: LeaderHome,
   beforeEnter: async (to, from, next) => {
     var role = await authorizationService.checkRole()
-    if (role == "student" || role == "mentor" || role == "admin") {
+    if (role == "leader" || role == "mentor" || role == "admin") {
       next()
     }
     else {
@@ -85,7 +86,6 @@ const routes = [{
   component: MentorHome,
   beforeEnter: async (to, from, next) => {
     var role = await authorizationService.checkRole()
-    role = role.data
     if (role == "mentor" || role == "admin") {
       next()
     }
@@ -100,11 +100,39 @@ const routes = [{
   //   }
   // ]
 },
+{
+  path: '/Error',
+  component: error,
+},
 ];
 
 const router = new VueRouter({
   base: "~/public_html/SIAttendance/",
-  routes // short for `routes: routes`
+  routes // short for `routes: routes`,
+})
+
+router.beforeEach(async (to, from, next) => {
+  if (to.path == "/error") {
+    next()
+  }
+  var user = "nope"
+  try {
+    user = await authorizationService.checkAccountExists()
+    console.log(user)
+    if (user == true) {
+      next()
+    }
+    else if (user == false) {
+      next('/CreateUser')
+    }
+    else {
+      next('/error')
+    }
+  }
+  catch (e) {
+    console.log(e)
+    next('/error')
+  }
 })
 
 new Vue({
@@ -118,5 +146,8 @@ new Vue({
   watch: {},
 
   router,
-  render: h => h(App)
+  render: h => h(App),
+  icons: {
+    iconfont: 'md',
+  },
 })

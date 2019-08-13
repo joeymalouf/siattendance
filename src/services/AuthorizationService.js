@@ -19,7 +19,15 @@ export class AuthorizationService {
             return role
         }
     }
-    async setRole() {
-        return "dude"
+    async checkAccountExists() {
+        var body = new FormData();
+        body.append('func', 'userExists')
+        try {
+            var res = await axios.post('back/Authorization.php', body)
+            return res.data
+        }
+        catch (e) {
+            return e
+        }
     }
 }
