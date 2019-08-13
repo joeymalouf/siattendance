@@ -13,7 +13,7 @@
         $result_user_exists = get_result($query_user_exists);
         if ($result_user_exists) {
             http_response_code(409);
-            print_r("Error! User account already exists");
+            print_r("User account already exists");
             exit;
         }
         
@@ -24,7 +24,7 @@
 
         if (!$result_add_user) {
             http_response_code(500);
-            print_r("Error! User was unable to be created for an unknown reason.");
+            print_r("User was unable to be created for an unknown reason.");
             exit;
         }
         http_response_code(200);

@@ -96,13 +96,14 @@ export default {
           this.$http
             .post("./back/User.php", body)
             .then(() => {
-              this.passSuccessMessage("User account has been created!");
+              this.success = "User account has been created!"
+              this.passSuccessMessage();
               this.$router.push("/");
             })
             .catch(error => {
               this.error =
                 statusCodeHandler(error.response.status) +
-                "Could not contact databse";
+                error.response.data;
               this.passErrorMessage();
             });
         }
