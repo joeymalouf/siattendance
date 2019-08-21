@@ -25,6 +25,7 @@ import CurrentSessions from './pages/CurrentSessions'
 import LeaderHome from './pages/LeaderHome'
 import MentorHome from './pages/MentorHome'
 import error from './pages/Error'
+import AllUsers from './pages/AllUsers'
 import { AuthorizationService } from './services/AuthorizationService'
 
 Vue.use(VueRouter);
@@ -65,15 +66,15 @@ const routes = [{
 {
   path: '/Leader',
   component: LeaderHome,
-  beforeEnter: async (to, from, next) => {
-    var role = await authorizationService.checkRole()
-    if (role == "leader" || role == "mentor" || role == "admin") {
-      next()
-    }
-    else {
-      next(false)
-    }
-  },
+  // beforeEnter: async (to, from, next) => {
+  //   var role = await authorizationService.checkRole()
+  //   if (role == "leader" || role == "mentor" || role == "admin") {
+  //     next()
+  //   }
+  //   else {
+  //     next(false)
+  //   }
+  // },
   // children: [
   //   {
   //     path: '/',
@@ -99,6 +100,19 @@ const routes = [{
   //     component: LeaderHome
   //   }
   // ]
+},
+{
+  path: '/Admin/Users',
+  component: AllUsers,
+  // beforeEnter: async (to, from, next) => {
+  //   var role = await authorizationService.checkRole()
+  //   if (role == "mentor" || role == "admin") {
+  //     next()
+  //   }
+  //   else {
+  //     next(false)
+  //   }
+  // },
 },
 {
   path: '/Error',

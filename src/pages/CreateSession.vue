@@ -29,15 +29,17 @@
             v-model="professor"
             required
           ></v-select>
-          <v-text-field
-            v-model="type"
-            v-validate="'required|max:30'"
-            :counter="30"
-            :error-messages="errors.collect('type')"
+          <v-select
+            :items="types"
             label="Type"
+            item-value="type"
+            v-model="type"
+            item-text="type"
+            v-validate="'required|max:30'"
+            :error-messages="errors.collect('type')"
             data-vv-name="type"
             required
-          ></v-text-field>
+          ></v-select>
           <v-menu
             v-model="datemenu"
             :close-on-content-click="false"
@@ -52,7 +54,7 @@
               <v-text-field
                 v-model="date"
                 label="Date"
-                append-icon="event"
+                append-icon="mdi-calendar"
                 readonly
                 v-on="on"
                 v-validate="'required'"
@@ -80,7 +82,7 @@
                 color="#14213d"
                 v-model="time"
                 label="Time (military)"
-                append-icon="access_time"
+                append-icon="mdi-clock-outline"
                 readonly
                 v-on="on"
                 v-validate="'required'"
@@ -111,13 +113,33 @@ export default {
       message: "",
       courses: [],
       professors: [],
+      types: ["Exam Review", "Lecture Review"],
       course: "",
       professor: "",
       type: "",
       date: null,
       time: null,
       datemenu: false,
-      timemenu: false
+      timemenu: false,
+      dictionary: {
+        custom: {
+          course: {
+            required: () => "Course cannot be empty.",
+          },
+          professor: {
+            required: () => "Professor cannot be empty.",
+          },
+          type: {
+            required: () => "Type cannot be empty.",
+          },
+          date: {
+            required: () => "Date cannot be empty.",
+          },
+          time: {
+            required: () => "Time cannot be empty.",
+          },
+        }
+      }
     };
   },
   watch: {

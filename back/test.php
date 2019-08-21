@@ -1,3 +1,2 @@
 <?php
-	print_r($_SERVER['uid']);
-?>
+print_r($_SERVER['uid']);

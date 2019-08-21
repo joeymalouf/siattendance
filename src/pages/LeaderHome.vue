@@ -1,10 +1,16 @@
 <template>
-  <v-flex xs12 sm10 md6>
+  <v-flex xs12 sm10 md10>
     <v-card>
       <v-card-title>
         Sessions
         <v-spacer></v-spacer>
-        <v-text-field v-model="search" appendIcon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
+        <v-text-field
+          v-model="search"
+          appendIcon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
       </v-card-title>
       <v-data-table :headers="headers" :items="sessions" :search="search" class="elevation-1">
         <template v-slot:item.view="{ item }">
