@@ -1,29 +1,6 @@
 # siattendance
 
-## Project setup
-```
-npm install
-```
+A project for the chemistry department at ole miss to track the attendance of their students to supplemental instructuion.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Vue.js front end
+PHP/MYSQL backend
